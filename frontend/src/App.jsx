@@ -1,12 +1,13 @@
 import { useState } from "react";
-import Login from "./components/Login";
+import AuthPage from "./pages/AuthPage";
+import Dashboard from "./pages/DashBoard";
 
 function App() {
   const [token, setToken] = useState(() => {
     return localStorage.getItem("token");
   });
 
-  const handleLogin = (newToken) => {
+  const handleAuth = (newToken) => {
     localStorage.setItem("token", newToken);
     setToken(newToken);
   };
@@ -17,16 +18,18 @@ function App() {
   };
 
   return (
-    <div>
+    <div className="app">
       <h1>Atlas</h1>
 
       {token ? (
         <>
-          <p>Logged in</p>
-          <button onClick={handleLogout}>Logout</button>
+          <button onClick={handleLogout} className="muted">
+            logout
+          </button>
+          <Dashboard />
         </>
       ) : (
-        <Login onLogin={handleLogin} />
+        <AuthPage onAuth={handleAuth} />
       )}
     </div>
   );

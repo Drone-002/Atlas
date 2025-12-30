@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { apiFetch } from "../api";
+import { apiFetch } from "../api/apiFetch";
 
-function Login({ onLogin }) {
+function Register({ onRegister }) {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
@@ -13,15 +14,19 @@ function Login({ onLogin }) {
     setLoading(true);
 
     try {
-      const data = await apiFetch("/auth/Login", {
+      await apiFetch("/auth/register", {
+        method: "POST",
+        body: JSON.stringify({ name, email, password }),
+      });
+
+      const loginData = await apiFetch("/auth/login", {
         method: "POST",
         body: JSON.stringify({ email, password }),
       });
 
-      localStorage.setItem("token", data.token);
-      onLogin(data.token);
+      localStorage.setItem("token", loginData.token);
+      onRegister(loginData.token);
     } catch (err) {
-      console.error("LOGIN ERROR:", err);
       setError(err.message);
     } finally {
       setLoading(false);
@@ -30,9 +35,17 @@ function Login({ onLogin }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h2>Login</h2>
+      <h2>Register</h2>
 
       {error && <p style={{ color: "red" }}>{error}</p>}
+
+      <input
+        type="text"
+        placeholder="Name"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        required
+      />
 
       <input
         type="email"
@@ -50,9 +63,11 @@ function Login({ onLogin }) {
         required
       />
 
-      <button disabled={loading}>{loading ? "Logging in..." : "Login"}</button>
+      <button disabled={loading}>
+        {loading ? "Creating account..." : "Register"}
+      </button>
     </form>
   );
 }
 
-export default Login;
+export default Register;

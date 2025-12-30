@@ -1,68 +1,128 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    --bg: #f6f4fb;
+    --surface: #ffffff;
+    --primary: #6b4eff;
+    --primary-soft: #e7e3ff;
+    --text-main: #1e1b2e;
+    --text-muted: #6b6880;
+    --border: #ddd7ff;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+/* Reset */
+* {
+    box-sizing: border-box;
 }
 
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+    margin: 0;
+    font-family: "Inter", system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text-main);
 }
 
+/* Layout */
+.app {
+    max-width: 720px;
+    margin: 4rem auto;
+    padding: 2rem;
+    background: var(--surface);
+    border-radius: 14px;
+    box-shadow: 0 10px 40px rgba(107, 78, 255, 0.08);
+}
+
+/* Headings */
 h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+    font-family: "Playfair Display", serif;
+    font-weight: 600;
+    margin-bottom: 2rem;
 }
 
+h2 {
+    font-weight: 500;
+    margin: 2rem 0 1rem;
+}
+
+/* Muted text */
+.muted {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/* Errors */
+.error {
+    color: #b00020;
+}
+
+/* Forms */
+form {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+input {
+    flex: 1;
+    padding: 0.6rem 0.7rem;
+    font-size: 0.95rem;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: #faf9ff;
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--primary);
+    background: white;
+}
+
+/* Buttons */
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+    padding: 0.55rem 0.9rem;
+    font-size: 0.9rem;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--primary-soft);
+    color: var(--primary);
+    cursor: pointer;
+    transition: all 0.15s ease;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+button:hover {
+    background: var(--primary);
+    color: white;
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Lists */
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    margin-bottom: 0.6rem;
+}
+
+li button {
+    background: transparent;
+    border: none;
+    padding: 0.3rem 0;
+    color: var(--text-main);
+}
+
+li button:hover {
+    color: var(--primary);
+    background: transparent;
+}
+
+/* Divider feeling */
+hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2rem 0;
 }
