@@ -85,7 +85,7 @@ export const login = async (req, res) => {
 };
 
 export const me = async (req, res) => {
-  res.Status(200).json({
+  res.status(200).json({
     message: "Authenticated User",
     user: req.user,
   });

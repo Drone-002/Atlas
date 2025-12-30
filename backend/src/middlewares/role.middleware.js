@@ -1,10 +1,10 @@
-import Membership from "../models/membership.model.js";
+import Membership from "../models/Memberships.js";
 
 const requireRole = (allowedRoles = []) => {
   return async (req, res, next) => {
     try {
       const { workspaceId } = req.params;
-      const userId = requser.i;
+      const userId = req.user.id;
 
       if (!workspaceId) {
         return res.status(400).json({
@@ -13,7 +13,7 @@ const requireRole = (allowedRoles = []) => {
       }
 
       const membership = await Membership.findOne({
-        userId: userId,
+        user: userId,
         workspace: workspaceId,
       });
 
@@ -31,6 +31,7 @@ const requireRole = (allowedRoles = []) => {
       req.membership = membership;
       next();
     } catch (error) {
+      console.log(error);
       res.status(500).json({
         message: "Internal server error",
       });

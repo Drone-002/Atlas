@@ -10,8 +10,8 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/auth", authRoutes);
-app.use("/workspace", workspaceRoutes);
-app.use("/task", taskRoutes);
+app.use("/workspaces", workspaceRoutes);
+app.use("/workspaces/:workspaceId", taskRoutes);
 
 app.get("/health", (req, res) => {
   res.json({ status: "Atlas backend running" });

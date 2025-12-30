@@ -6,17 +6,17 @@ import {
   getWorkspaceTasks,
 } from "../controllers/task.controller.js";
 
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 
 router.post(
-  "/:workspaceId/tasks",
+  "/tasks",
   authMiddleware,
   requiredRole(["owner", "editor"]),
   createTask,
 );
 
 router.get(
-  "/:workspaceId/tasks",
+  "/tasks",
   authMiddleware,
   requiredRole(["owner", "editor", "viewer"]),
   getWorkspaceTasks,

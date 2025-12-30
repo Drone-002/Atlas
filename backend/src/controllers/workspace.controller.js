@@ -11,20 +11,20 @@ export const createWorkspace = async (req, res) => {
       });
     }
 
-    const workspace = await Workspace.create({
+    const createdWorkspace = await Workspace.create({
       name,
       description,
       createdBy: req.user.id,
     });
     await Membership.create({
-      workspaceId: workspace._id,
-      userId: req.user.id,
+      user: req.user.id,
+      workspace: createdWorkspace._id,
       role: "owner",
     });
 
     res.status(201).json({
       message: "Workspace created successfully",
-      workspace,
+      createdWorkspace,
     });
   } catch (error) {
     res.status(500).json({
